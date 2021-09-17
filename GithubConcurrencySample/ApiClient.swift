@@ -15,7 +15,7 @@ class ApiClient {
     private let decoder: JSONDecoder = {
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-//        jsonDecoder.dateDecodingStrategy = .iso8601
+        jsonDecoder.dateDecodingStrategy = .iso8601
         return jsonDecoder
     }()
 
