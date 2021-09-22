@@ -23,19 +23,26 @@ struct ContentView: View {
             
             Group {
                 
-                if viewModel.loading {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                        .frame(width: 50, height: 50)
-                        .scaleEffect(2.0)
-                } else if !viewModel.hasError {
+
+                
+                if !viewModel.hasError {
                     
-                    //show list
-                    List {
-                        ForEach.init(viewModel.items) { item in
-                            RepositoryRow(item: item)
+                    VStack {
+                        if viewModel.loading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .frame(width: 50, height: 50)
+                                .scaleEffect(2.0)
                         }
-                    }.frame(maxHeight: .infinity)
+                        
+                        //show list
+                        List {
+                            ForEach.init(viewModel.items) { item in
+                                RepositoryRow(item: item)
+                            }
+                        }.frame(maxHeight: .infinity)
+                        
+                    }                    
                     
                 } else {
                     //show error
