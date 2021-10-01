@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ApiClient {
+actor ApiClient {
     
     private let session = URLSession.shared
     private let baseUrl: String = "https://api.github.com"
@@ -23,8 +23,8 @@ class ApiClient {
         let queryString = query.replacingOccurrences(of: " ", with: "+")
         let url = URL(string: baseUrl + "/search/repositories?q=\(queryString)")!
         let request = URLRequest(url: url)
-        async let (data, _) = session.data(for: request)
-        return try await decoder.decode(SearchRepositoryResponse.self, from: data) //need try await
+        let (data, _) = try await session.data(for: request)
+        return try decoder.decode(SearchRepositoryResponse.self, from: data)
     }
     
 }
